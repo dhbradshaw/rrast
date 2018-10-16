@@ -7,5 +7,6 @@ fn main() {
     let conn = client.get_connection().unwrap();
     let _: () = conn.set("answer", 42i32).unwrap();
     let answer: i32 = conn.get("answer").unwrap();
-    println!("Answer: {}", answer);
+    let result: redis::RedisResult<bool> = conn.expire("answer", 1);
+    println!("Answer: {} {:?}", answer, result);
 }
